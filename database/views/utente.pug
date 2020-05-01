@@ -1,0 +1,12 @@
+extends layout
+block content
+  ul
+    li
+     a(href="index") Nuovo Utente
+    li
+     a(href="/") Elenco utenti
+  each arr in utente
+ 
+    h1 #{arr.Utente}
+    p #{arr.Password}
+   

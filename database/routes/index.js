@@ -8,23 +8,6 @@ const config = {
   server: "213.140.22.237",  //Stringa di connessione
   database: '4DD_19', //(Nome del DB)
 }
-/* GET home page.router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.get('/immagini', function(req, res, next) {
-  sql.connect(config, err => {
-    if(err) console.log(err);  // ... error check
-    
-    // Query
-    let sqlRequest = new sql.Request();  //Oggetto che serve a creare le query
-    sqlRequest.query('select Unit from [cr-unit-attributes]', (err, result) => {
-        if (err) console.log(err); // ... error checks
-        res.render('immagini',{dati:result.recordset});  //Invio il risultato
-    });
-    
-  });
-}); */
 let executeQuery = function (res, query, next, pagina) {
   sql.connect(config, function (err) {
     if (err) { //Display error page
@@ -58,7 +41,11 @@ router.get('/index', function(req,res,next){
     res.render('index');
 });
 
-
+  router.get('/search/:name', function (req, res, next) {
+  let sqlQuery = `select * from dbo.[Utente] where Username = '${req.body.username}' && Password ='${req.body.password}'`;
+  executeQuery(res, sqlQuery, next);
+   res.send({success:true, message: "login effettuato"})
+});
 
 module.exports = router;
 

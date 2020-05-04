@@ -42,16 +42,22 @@ router.get('/index', function(req,res,next){
 });
 
 
- router.get('/login', function (req, res, next) {
-  let sqlQuery = `select * from dbo.[Utente] where NomeUtente = '${req.body.username}' && Password ='${req.body.password}'`;
-  if (result.recordset==1){
-  executeQuery(res.send({success:true,message: "login effettuato"}), sqlQuery, next);
-  }
-  else
-  {
-	res.send({success:false, message: "login non effettuato"})
-  }
+router.get('/search/:name/:pwd', function (req, res, next) {
+    console.log(req.params.name + " " + req.params.pwd); //Fino qui arriva
+    let sqlQuery = `select * from dbo.[Utente] where Username = '${req.body.name}' AND Password ='${req.body.pwd}'`;
+  
+    sql.connect(config, function (err) {
+        if (err) { console.log("Error while connecting database :- " + err); }
+        var request = new sql.Request(); // create Request object
+        request.query(sqlQuery, function (err, result) { //Display error page
+           //Non va qui perchè non esiste la tabella
+            if (err) { console.log("Error while querying database :- " + err); }
  
+            console.log(result.recordset.length);
+            if (length == 0) res.send({ success: false, message: "login non effettuato" })
+            else res.send({ success: false, message: "login non effettuato" })
+        });
+    });
 });
 
 module.exports = router;

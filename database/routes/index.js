@@ -41,10 +41,17 @@ router.get('/index', function(req,res,next){
     res.render('index');
 });
 
-  router.get('/search/:name', function (req, res, next) {
-  let sqlQuery = `select * from dbo.[Utente] where Username = '${req.body.username}' && Password ='${req.body.password}'`;
-  executeQuery(res, sqlQuery, next);
-   res.send({success:true, message: "login effettuato"})
+
+ router.get('/login', function (req, res, next) {
+  let sqlQuery = `select * from dbo.[Utente] where NomeUtente = '${req.body.username}' && Password ='${req.body.password}'`;
+  if (result.recordset==1){
+  executeQuery(res.send({success:true,message: "login effettuato"}), sqlQuery, next);
+  }
+  else
+  {
+	res.send({success:false, message: "login non effettuato"})
+  }
+ 
 });
 
 module.exports = router;

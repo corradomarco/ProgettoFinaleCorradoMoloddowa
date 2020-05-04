@@ -25,7 +25,7 @@ let executeQuery = function (res, query, next, pagina) {
       }
       //res.render('unita', {unit : result.recordset}); //Il vettore con i dati è nel campo recordset (puoi loggare result per verificare)
       console.log(result.recordset);
-      renderizza(pagina, res, result.recordset)
+      renderizza(pagina, res, result.recordset);
       sql.close();
     });
 

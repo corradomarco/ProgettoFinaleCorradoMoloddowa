@@ -1,5 +1,5 @@
 export class Utente
 {
-    username : String;
-    password : String;
+    Username : String;
+    Password : String;
 }

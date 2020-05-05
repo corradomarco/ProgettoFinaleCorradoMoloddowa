@@ -18,23 +18,22 @@ export class LoginComponent {
   constructor(private http: HttpClient) { } //Dependency injection
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
-    this.obsUnit = this.http.get<Utente[]>('https://3000-ad045dd7-d0a0-41ce-aa9a-dfc34db44243.ws-eu01.gitpod.io/users');
+    this.obsUnit = this.http.get<Utente[]>('https://3000-f02e59e2-8bdc-4c61-be54-9d583611e0a4.ws-eu01.gitpod.io/users');
     //Mi sottoscrivo all’observable e scrivo la arrow function che riceve i dati
     this.obsUnit.subscribe((data: Utente[]) => {this.data = data;});
   }
-  postObserver : Observable<Utente[]>;
-  postData : any;
+  postObserver : Observable<Object>;
+  postData :Object;
 
 addUnit(Username: HTMLInputElement,Password:HTMLInputElement): void {
     this.postData={
       Username:Username.value,
-      Uassword:Password.value
+      Password:Password.value
     }
 
-    this.postObserver = this.http.get<Utente[]>(`https://3000-ad045dd7-d0a0-41ce-aa9a-dfc34db44243.ws-eu01.gitpod.io/${Username.value}/${Password.value}`);
-    this.postObserver.subscribe((postdata:Utente[]) => {this.postData = postdata;});
+    this.postObserver = this.http.get(`https://3000-f02e59e2-8bdc-4c61-be54-9d583611e0a4.ws-eu01.gitpod.io/${Username.value}/${Password.value}`);
+    this.postObserver.subscribe(data => {this.postData = data;});
 
   }
-
 
 }

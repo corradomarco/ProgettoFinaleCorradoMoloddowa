@@ -1,21 +1,24 @@
 <div class="form-group">
-<form>
- <h3 >login</h3>
-  <div>
-    <label for="username">Username:</label>
-    <input name="username" #Username>
-  </div>
+  <form>
+  <div *ngIf="noLog">
+    <h3 >login</h3>
+      <div>
+        <label for="username">Username:</label>
+        <input name="username" #Username>
+      </div>
 
-  <div>
-    <label for="password">password:</label>
-    <input name="password" #Password>
+      <div>
+        <label for="password">password:</label>
+        <input name="password" #Password>
+      </div>
+    <button (click)="addUnit(Username,Password)">
+      login
+      </button>
   </div>
-<button (click)="addUnit(Username,Password)">
-  login
-  </button>
-  </form>
+    <div *ngIf="al"><app-home></app-home></div>
+    </form>
 
- <p><a href (click)="back()">home</a></p>
+
 </div>
 
 

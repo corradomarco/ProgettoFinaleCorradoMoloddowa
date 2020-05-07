@@ -31,6 +31,4 @@ selectUnit( newDeploytime: HTMLInputElement): boolean {
     this.postObserver.subscribe(data => this.postData = data);
     return false;
   }
-
-
 }

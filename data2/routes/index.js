@@ -57,7 +57,7 @@ router.get('/search/:Username/:Password', function (req, res, next) {
             console.log(result.recordset.length);
            
             if (result.recordset.length == 0) res.send({ success: false, message: "login non effettuato" })
-            else res.send(result.recordset);
+            else res.send({ success: true, message: result.recordset })
         });
     });
 });

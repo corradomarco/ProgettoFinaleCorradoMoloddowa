@@ -21,7 +21,7 @@ export class LoginComponent {
   constructor(private http: HttpClient,private location: Location) { } //Dependency injection
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
-    this.obsUnit = this.http.get<Utente[]>('https://3000-a7043b98-c26a-4498-8d21-6f48c76712c2.ws-eu01.gitpod.io/users');
+    this.obsUnit = this.http.get<Utente[]>('https://3000-ac714343-2c27-4f3a-8f6d-2a57bbe6db53.ws-eu01.gitpod.io/users');
     //Mi sottoscrivo all’observable e scrivo la arrow function che riceve i dati
     this.obsUnit.subscribe((data: Utente[]) => {this.data = data;});
   }
@@ -34,7 +34,7 @@ addUnit(Username: HTMLInputElement,Password:HTMLInputElement): void {
       Password:Password.value
     }
     console.log("fffff");
-    this.postObserver = this.http.get(`https://3000-a7043b98-c26a-4498-8d21-6f48c76712c2.ws-eu01.gitpod.io/search/${Username.value}/${Password.value}`); //Cambiato url e tipo di oggetto restituito dal server
+    this.postObserver = this.http.get(`https://3000-ac714343-2c27-4f3a-8f6d-2a57bbe6db53.ws-eu01.gitpod.io/search/${Username.value}/${Password.value}`); //Cambiato url e tipo di oggetto restituito dal server
                                         //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
     this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
        if(data["success"]==true){

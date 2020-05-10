@@ -64,7 +64,7 @@ router.get('/search/:Username/:Password', function (req, res, next) {
 
 router.get('/id/:id', function (req, res, next) {
     console.log(req.params.id); //Fino qui arriva
-    let sqlQuery = `select disponibilità from dbo.[Bici] where Id = '${req.params.id}' `;
+    let sqlQuery = `select diponibilità from dbo.[BiciDisp] where Id = '${req.params.id}' `;
   
     sql.connect(config, function (err) {
         if (err) { console.log("Error while connecting database :- " + err); }
@@ -75,8 +75,10 @@ router.get('/id/:id', function (req, res, next) {
  
             console.log(result.recordset.length);
            
-            if (result.recordset==false) res.send({ success: false, message: "non puoi" })
+            if (result.recordset.length == 0) res.send({ success: false, message: "non puoi" })
             else res.send({ success: true, message: result.recordset})
+
+
         });
     });
 });

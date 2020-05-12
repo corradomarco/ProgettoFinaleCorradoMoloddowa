@@ -4,10 +4,20 @@
       <div>
         <label for="id">id bici:</label>
         <input name="id" #id>
+
       </div>
     <button (click)="idBici(id)">
       guarda se è accessibile:
       </button>
+
+      <div *ngIf="al">
+        <label for="nome">nome:</label>
+        <input name="nome" #nome>
+        <label for="cognome">cognome:</label>
+        <input name="cognome" #cogonme>
+
+
+      </div>
     </form>
 </div>
 

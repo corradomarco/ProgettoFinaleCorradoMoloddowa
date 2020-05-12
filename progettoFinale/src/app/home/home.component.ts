@@ -24,15 +24,14 @@ idBici(id: HTMLInputElement): void {
 
     }
     console.log("home");
-    this.postObserver = this.http.get(`https://3000-c65c077b-f8d3-4284-8483-7fb41f036028.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
+    this.postObserver = this.http.get(`https://3000-d597cb9d-a449-4e7b-b429-e2fcf64fc6a8.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
                                         //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
     this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
         if(data["success"]==true){
         console.log("funziona")
           this.al=true;
     }
-
-    });//Salvo i dati ricevuti nella nuova variabile e loggo il risultato
+  });//Salvo i dati ricevuti nella nuova variabile e loggo il risultato
   }
 
 

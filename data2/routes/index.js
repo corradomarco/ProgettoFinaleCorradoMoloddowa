@@ -64,7 +64,12 @@ router.get('/search/:Username/:Password', function (req, res, next) {
 
 router.get('/id/:id', function (req, res, next) {
     console.log(req.params.id); //Fino qui arriva
-    let sqlQuery = `select diponibilità from dbo.[BiciDisp] where Id = '${req.params.id}' AND  data = MAX(Data)`;
+    let sqlQuery = `select diponibilità 
+                    from dbo.[BiciDisp] 
+                    where Id = '${req.params.id}' 
+                    AND  data = (SELECT MAX(Data) 
+                    from dbo.[BiciDisp]  
+                    WHERE Id = '${req.params.id}') `;
   
     sql.connect(config, function (err) {
         if (err) { console.log("Error while connecting database :- " + err); }
@@ -74,8 +79,7 @@ router.get('/id/:id', function (req, res, next) {
             if (err) { console.log("Error while querying database :- " + err); }
  
            
-           
-            if (result.recordset==0) res.send({ success: false, message: "non puoi" })
+            if (result.recordset=="0") res.send({ success: false, message: "non puoi" })
             else res.send({ success: true, message: result.recordset})
 
 

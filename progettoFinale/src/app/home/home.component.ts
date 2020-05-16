@@ -24,15 +24,33 @@ idBici(id: HTMLInputElement): void {
 
     }
     console.log("home");
-    this.postObserver = this.http.get(`https://3000-a9c89bff-e19a-4a48-aa1a-08ec5dc9bcb5.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
+    this.postObserver = this.http.get(`https://3000-da0a4da0-7d3b-442d-9efa-d5cbed02f120.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
                                         //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
+
     this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
-        if(data["success"]==true){
+        if(data["disponibilità"]=="si"){
         console.log("funziona")
           this.al=true;
     }
   });//Salvo i dati ricevuti nella nuova variabile e loggo il risultato
   }
+
+  postObserver2 : Observable<Object>;
+postData2 : Object;
+/*
+prenota(id: HTMLInputElement,nome:HTMLInputElement,cognome:HTMLInputElement): boolean {
+    let newData: Utente = new Utente();
+    newData.id = id.value;
+    newData.nome = nome.value;
+    newData.cognome = cognome.value;
+
+
+    let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
+    this.postObserver2 = this.http.post('https://3000-da0a4da0-7d3b-442d-9efa-d5cbed02f120.ws-eu01.gitpod.io/prenota', JSON.stringify(newData),headers)
+    this.postObserver2.subscribe(data => this.postData2 = data);
+    return false;
+  }
+  */
 
 
 

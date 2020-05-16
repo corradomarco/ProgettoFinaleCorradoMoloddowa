@@ -64,12 +64,12 @@ router.get('/search/:Username/:Password', function (req, res, next) {
 
 router.get('/id/:id', function (req, res, next) {
     console.log(req.params.id); //Fino qui arriva
-    let sqlQuery = `select diponibilità 
+    let sqlQuery = `select disponibilità 
                     from dbo.[BiciDisp] 
-                    where Id = '${req.params.id}' 
+                    where id = '${req.params.id}' 
                     AND  data = (SELECT MAX(Data) 
                     from dbo.[BiciDisp]  
-                    WHERE Id = '${req.params.id}') `;
+                    WHERE id = '${req.params.id}') `;
   
     sql.connect(config, function (err) {
         if (err) { console.log("Error while connecting database :- " + err); }
@@ -77,9 +77,10 @@ router.get('/id/:id', function (req, res, next) {
         request.query(sqlQuery, function (err, result) { //Display error page
            //Non va qui perchè non esiste la tabella
             if (err) { console.log("Error while querying database :- " + err); }
- 
+
+           console.log(result.recordset)
            
-            if (result.recordset=="0") res.send({ success: false, message: "non puoi" })
+            if (result.recordset["disponibilità"]=='no') res.send({ success: false, message: "non puoi" })
             else res.send({ success: true, message: result.recordset})
 
 

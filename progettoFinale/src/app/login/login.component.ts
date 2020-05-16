@@ -7,6 +7,7 @@ import { Utente } from '../user';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Location} from '@angular/common';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +22,7 @@ export class LoginComponent {
   constructor(private http: HttpClient,private location: Location) { } //Dependency injection
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
-    this.obsUnit = this.http.get<Utente[]>('https://3000-a9c89bff-e19a-4a48-aa1a-08ec5dc9bcb5.ws-eu01.gitpod.io/users');
+    this.obsUnit = this.http.get<Utente[]>('https://3000-da0a4da0-7d3b-442d-9efa-d5cbed02f120.ws-eu01.gitpod.io/users');
     //Mi sottoscrivo all’observable e scrivo la arrow function che riceve i dati
     this.obsUnit.subscribe((data: Utente[]) => {this.data = data;});
   }
@@ -34,7 +35,7 @@ addUnit(Username: HTMLInputElement,Password:HTMLInputElement): void {
       Password:Password.value
     }
     console.log("fffff");
-    this.postObserver = this.http.get(`https://3000-a9c89bff-e19a-4a48-aa1a-08ec5dc9bcb5.ws-eu01.gitpod.io/search/${Username.value}/${Password.value}`); //Cambiato url e tipo di oggetto restituito dal server
+    this.postObserver = this.http.get(`https://3000-da0a4da0-7d3b-442d-9efa-d5cbed02f120.ws-eu01.gitpod.io/search/${Username.value}/${Password.value}`); //Cambiato url e tipo di oggetto restituito dal server
                                         //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
     this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
        if(data["success"]==true){
@@ -42,21 +43,8 @@ addUnit(Username: HTMLInputElement,Password:HTMLInputElement): void {
           this.al=true;
           this.noLog=false;
     }
-
-    });//Salvo i dati ricevuti nella nuova variabile e loggo il risultato
-
-
+    });
   }
-  /*
-  back() : void
-  {
-    if(this.al==true){
-    console.log("non puoi entrare");
-    }else{  this.location.go("/home");
-    }
-
-  }
-  */
 
 
 }

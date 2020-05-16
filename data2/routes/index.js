@@ -80,7 +80,7 @@ router.get('/id/:id', function (req, res, next) {
 
            console.log(result.recordset)
            
-            if (result.recordset["disponibilità"]=='no') res.send({ success: false, message: "non puoi" })
+            if (result.recordset["0"]["disponibilità"]=='no') res.send({ success: false, message: "non puoi" })
             else res.send({ success: true, message: result.recordset})
 
 

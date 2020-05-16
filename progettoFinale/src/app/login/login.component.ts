@@ -22,7 +22,7 @@ export class LoginComponent {
   constructor(private http: HttpClient,private location: Location) { } //Dependency injection
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
-    this.obsUnit = this.http.get<Utente[]>('https://3000-da0a4da0-7d3b-442d-9efa-d5cbed02f120.ws-eu01.gitpod.io/users');
+    this.obsUnit = this.http.get<Utente[]>('https://3000-da0a4da0-7d3b-442d-9efa-d5cbed02f120.ws-eu01.gitpod.io/sers');
     //Mi sottoscrivo all’observable e scrivo la arrow function che riceve i dati
     this.obsUnit.subscribe((data: Utente[]) => {this.data = data;});
   }

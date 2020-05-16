@@ -14,10 +14,11 @@ export class HomeComponent  {
  title = 'progetto';
   al:boolean=false;
   constructor(private http: HttpClient) { } //Dependency injection
-postObserver : Observable<Object>;//Cambiato tipo di dato attesto Utente -> Object
+  postObserver : Observable<Object>;//Cambiato tipo di dato attesto Utente -> Object
   postData : Object; //Cambiato tipo di dato Utente -> Object
   requestResult : Object; //nuovo oggetto per contenere il risultato della richiesta
-
+  postObserver2 : Observable<Object>;
+  postData2 : Object;
 idBici(id: HTMLInputElement): void {
     this.postData={
       id:id.value
@@ -28,15 +29,12 @@ idBici(id: HTMLInputElement): void {
                                         //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
 
     this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
-        if(data["disponibilità"]=="si"){
+        if(data["success"]==true){
         console.log("funziona")
           this.al=true;
     }
-  });//Salvo i dati ricevuti nella nuova variabile e loggo il risultato
+  });
   }
-
-  postObserver2 : Observable<Object>;
-postData2 : Object;
 /*
 prenota(id: HTMLInputElement,nome:HTMLInputElement,cognome:HTMLInputElement): boolean {
     let newData: Utente = new Utente();
@@ -50,7 +48,9 @@ prenota(id: HTMLInputElement,nome:HTMLInputElement,cognome:HTMLInputElement): bo
     this.postObserver2.subscribe(data => this.postData2 = data);
     return false;
   }
-  */
+*/
+
+
 
 
 

@@ -35,20 +35,18 @@ idBici(id: HTMLInputElement): void {
     }
   });
   }
-/*
-prenota(id: HTMLInputElement,nome:HTMLInputElement,cognome:HTMLInputElement): boolean {
+prenota(id: HTMLInputElement,nome:HTMLInputElement,data:HTMLInputElement): boolean {
     let newData: Utente = new Utente();
     newData.id = id.value;
     newData.nome = nome.value;
-    newData.cognome = cognome.value;
-
+    newData.data = data.value;
 
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
     this.postObserver2 = this.http.post('https://3000-da0a4da0-7d3b-442d-9efa-d5cbed02f120.ws-eu01.gitpod.io/prenota', JSON.stringify(newData),headers)
     this.postObserver2.subscribe(data => this.postData2 = data);
     return false;
   }
-*/
+
 
 
 

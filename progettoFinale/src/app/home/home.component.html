@@ -13,10 +13,13 @@
       <div *ngIf="al">
         <label for="nome">nome:</label>
         <input name="nome" #nome>
-        <label for="cognome">cognome:</label>
-        <input name="cognome" #cogonme>
-
+         <label for="data">data:</label>
+        <input name="data" #data>
+        <button (click)="prenota(id,nome,data)">
+            prenota!
+              </button>
       </div>
+
 
 
     </form>

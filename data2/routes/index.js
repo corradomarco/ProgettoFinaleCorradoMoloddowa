@@ -93,8 +93,8 @@ router.post('/prenota', function (req, res, next) {
     res.status(500).json({success: false, message:'Error while connecting database', error:err});
     return;
   }
-  let sqlInsert = `INSERT INTO dbo.[BiciDisp] (id,nome,data) 
-                     VALUES ('${unit.id}','${unit.nome}','${unit.data}')`;
+  let sqlInsert = `INSERT INTO dbo.[BiciDisp] (id,nome,data,disponibilità) 
+                     VALUES ('${unit.id}','${unit.nome}''${unit.disponibilità}','${unit.data}',)`;
   executeQuery(res, sqlInsert, next);
   res.send({success:true, message: "prenotazione effettuata con successo", unit: unit})
 });

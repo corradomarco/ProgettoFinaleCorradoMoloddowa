@@ -79,13 +79,24 @@ router.get('/id/:id', function (req, res, next) {
             if (err) { console.log("Error while querying database :- " + err); }
 
            console.log(result.recordset)
-           
+           if (result.recordset.length == 0) res.send({ success: false, message: "login non effettuato" })
+        
             if (result.recordset["0"]["disponibilità"]=='no') res.send({ success: false, message: "non puoi" })
             else res.send({ success: true, message: result.recordset})
-
-
         });
     });
+});
+router.post('/prenota', function (req, res, next) {
+  // prenota 
+  let unit = req.body;
+  if (!unit) {  //Qui dovremmo testare tutti i campi della richiesta
+    res.status(500).json({success: false, message:'Error while connecting database', error:err});
+    return;
+  }
+  let sqlInsert = `INSERT INTO dbo.[BiciDisp] (id,nome,data) 
+                     VALUES ('${unit.id}','${unit.nome}','${unit.data}')`;
+  executeQuery(res, sqlInsert, next);
+  res.send({success:true, message: "prenotazione effettuata con successo", unit: unit})
 });
 
 

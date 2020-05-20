@@ -94,7 +94,7 @@ router.post('/prenota', function (req, res, next) {
     return;
   }
   let sqlInsert = `INSERT INTO dbo.[BiciDisp] (id,nome,data,disponibilità) 
-                     VALUES ('${unit.id}','${unit.nome}''${unit.disponibilità}','${unit.data}',)`;
+                     VALUES ('${unit.id}','${unit.disponibilità}','${unit.data}',)`;
   executeQuery(res, sqlInsert, next);
   res.send({success:true, message: "prenotazione effettuata con successo", unit: unit})
 });

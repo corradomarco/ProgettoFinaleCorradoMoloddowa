@@ -4,13 +4,12 @@ import { Utente } from '../user';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-rilascia',
+  templateUrl: './rilascia.component.html',
+  styleUrls: ['./rilascia.component.css']
 })
-export class HomeComponent  {
+export class RilasciaComponent {
  title = 'progetto';
   al:boolean=false;
   constructor(private http: HttpClient) { } //Dependency injection
@@ -19,27 +18,11 @@ export class HomeComponent  {
   requestResult : Object; //nuovo oggetto per contenere il risultato della richiesta
   postObserver2 : Observable<Object>;
   postData2 : Object;
-idBici(id: HTMLInputElement): void {
-    this.postData={
-      id:id.value
-
-    }
-    console.log("home");
-    this.postObserver = this.http.get(`https://3000-af4aa3f2-1218-4da1-8041-dd02442aa1f1.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
-                                        //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
-
-    this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
-        if(data["success"]==true){
-        console.log("funziona")
-          this.al=true;
-    }
-  });
-  }
 
 prenota(id: HTMLInputElement,data:HTMLInputElement): boolean {
     let newData: Utente = new Utente();
     newData.id = id.value;
-    newData.disponibilità= "no";
+    newData.disponibilità= "si";
     newData.data = data.value;
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
     this.postObserver2 = this.http.post('https://3000-af4aa3f2-1218-4da1-8041-dd02442aa1f1.ws-eu01.gitpod.io/prenota', JSON.stringify(newData),headers)
@@ -55,3 +38,4 @@ prenota(id: HTMLInputElement,data:HTMLInputElement): boolean {
 
 
 }
+

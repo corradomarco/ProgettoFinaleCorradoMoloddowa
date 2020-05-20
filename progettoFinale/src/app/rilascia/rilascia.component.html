@@ -1,22 +1,15 @@
 <div class="form-group">
   <form>
-    <h3 >prenota una bici</h3>
+    <h3 >rilascia una bici</h3>
       <div>
         <label for="id">id bici:</label>
         <input name="id" #id>
-
-      </div>
-    <button (click)="idBici(id)">
-      guarda se è accessibile:
-      </button>
-
-      <div *ngIf="al">
         <label for="nome">nome:</label>
         <input name="nome" #nome>
          <label for="data">data:</label>
         <input name="data" #data>
         <button (click)="prenota(id,data)">
-            prenota!
+            rilascia!
               </button>
       </div>
 
@@ -24,7 +17,3 @@
 
     </form>
 </div>
-
-
-
-

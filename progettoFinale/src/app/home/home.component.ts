@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utente } from '../user';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -25,7 +26,7 @@ idBici(id: HTMLInputElement): void {
 
     }
     console.log("home");
-    this.postObserver = this.http.get(`https://3000-af4aa3f2-1218-4da1-8041-dd02442aa1f1.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
+    this.postObserver = this.http.get(`https://3000-aab306fa-cbb2-4d96-8354-6a431652cb34.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
                                         //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
 
     this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
@@ -40,9 +41,11 @@ prenota(id: HTMLInputElement,data:HTMLInputElement): boolean {
     let newData: Utente = new Utente();
     newData.id = id.value;
     newData.disponibilità= "no";
-    newData.data = data.value;
+    newData.data = new Date();
+
+    console.log(newData);
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
-    this.postObserver2 = this.http.post('https://3000-af4aa3f2-1218-4da1-8041-dd02442aa1f1.ws-eu01.gitpod.io/prenota', JSON.stringify(newData),headers)
+    this.postObserver2 = this.http.post(`${environment.serverUrl}/prenota`, {ciao:"bello"},headers);
     this.postObserver2.subscribe(data => this.postData2 = data);
     return false;
   }

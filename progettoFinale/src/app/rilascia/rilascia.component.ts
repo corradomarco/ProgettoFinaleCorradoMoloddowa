@@ -25,7 +25,7 @@ prenota(id: HTMLInputElement,data:HTMLInputElement): boolean {
     newData.disponibilità= "si";
     newData.data = data.value;
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
-    this.postObserver2 = this.http.post('https://3000-af4aa3f2-1218-4da1-8041-dd02442aa1f1.ws-eu01.gitpod.io/prenota', JSON.stringify(newData),headers)
+    this.postObserver2 = this.http.post('https://3000-aab306fa-cbb2-4d96-8354-6a431652cb34.ws-eu01.gitpod.io/prenota', JSON.stringify(newData),headers)
     this.postObserver2.subscribe(data => this.postData2 = data);
     return false;
   }

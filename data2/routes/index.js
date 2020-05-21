@@ -88,13 +88,15 @@ router.get('/id/:id', function (req, res, next) {
 });
 router.post('/prenota', function (req, res, next) {
   // prenota 
+  console.log(req.body);
   let unit = req.body;
   if (!unit) {  //Qui dovremmo testare tutti i campi della richiesta
     res.status(500).json({success: false, message:'Error while connecting database', error:err});
     return;
   }
-  let sqlInsert = `INSERT INTO dbo.[BiciDisp] (id,nome,data,disponibilità) 
-                     VALUES ('${unit.id}','${unit.disponibilità}','${unit.data}',)`;
+  let sqlInsert = `INSERT INTO dbo.[BiciDisp] (id, disponibilità, data) 
+                     VALUES ('${unit.id}','${unit.disponibilità}','${unit.data}')`;
+  console.log(sqlInsert);
   executeQuery(res, sqlInsert, next);
   res.send({success:true, message: "prenotazione effettuata con successo", unit: unit})
 });

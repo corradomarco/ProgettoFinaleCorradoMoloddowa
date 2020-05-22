@@ -1,7 +1,6 @@
 export class Utente
 {
-    id:any;
-    nome: String;
+    id:any ;
     disponibilità:string;
-    data:any;
+    data:string;
 }

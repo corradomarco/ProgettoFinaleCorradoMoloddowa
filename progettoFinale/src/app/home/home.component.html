@@ -10,21 +10,12 @@
       guarda se è accessibile:
       </button>
 
-      <div >
-        <label for="nome">nome:</label>
-        <input name="nome" #nome>
-         <label for="data">data:</label>
-        <input name="data" #data>
-        <button (click)="prenota(id,data)">
+      <div *ngIf="al">
+    <p>È disponibile</p>
+        <button (click)="prenota(id)">
             prenota!
               </button>
       </div>
 
-
-
     </form>
 </div>
-
-
-
-

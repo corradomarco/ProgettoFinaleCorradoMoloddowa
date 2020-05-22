@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utente } from '../user';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-rilascia',
@@ -19,22 +20,20 @@ export class RilasciaComponent {
   postObserver2 : Observable<Object>;
   postData2 : Object;
 
-prenota(id: HTMLInputElement,data:HTMLInputElement): boolean {
+    rilascia(id: HTMLInputElement): boolean {
     let newData: Utente = new Utente();
+    console.log(id.value);
     newData.id = id.value;
     newData.disponibilità= "si";
-    newData.data = data.value;
+    let date = new Date();
+    newData.data = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" " + date.getHours()+":"+date.getMinutes()+":" +date.getSeconds();
+
+    console.log(newData);
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
-    this.postObserver2 = this.http.post('https://3000-aab306fa-cbb2-4d96-8354-6a431652cb34.ws-eu01.gitpod.io/prenota', JSON.stringify(newData),headers)
-    this.postObserver2.subscribe(data => this.postData2 = data);
+    this.postObserver2 = this.http.post(`${environment.serverUrl}/rilascia`, newData,headers);
+    this.postObserver2.subscribe(data => {this.postData2 = data; console.log(data);});
     return false;
   }
-
-
-
-
-
-
 
 
 }

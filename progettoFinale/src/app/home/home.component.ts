@@ -20,13 +20,13 @@ export class HomeComponent  {
   requestResult : Object; //nuovo oggetto per contenere il risultato della richiesta
   postObserver2 : Observable<Object>;
   postData2 : Object;
-idBici(id: HTMLInputElement): void {
+  idBici(id: HTMLInputElement): void {
     this.postData={
       id:id.value
 
     }
     console.log("home");
-    this.postObserver = this.http.get(`https://3000-aab306fa-cbb2-4d96-8354-6a431652cb34.ws-eu01.gitpod.io/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
+    this.postObserver = this.http.get(`${environment.serverUrl}/id/${id.value}`); //Cambiato url e tipo di oggetto restituito dal server
                                         //BISOGNA SEMPRE AGGIORNARE L'URL QUANDO SI RIAVVIA GITPOD
 
     this.postObserver.subscribe(data => {this.requestResult = data; console.log(this.requestResult)
@@ -37,16 +37,18 @@ idBici(id: HTMLInputElement): void {
   });
   }
 
-prenota(id: HTMLInputElement,data:HTMLInputElement): boolean {
+    prenota(id: HTMLInputElement): boolean {
     let newData: Utente = new Utente();
+    console.log(id.value);
     newData.id = id.value;
     newData.disponibilità= "no";
-    newData.data = new Date();
+    let date = new Date();
+    newData.data = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" " + date.getHours()+":"+date.getMinutes()+":" +date.getSeconds();
 
     console.log(newData);
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
-    this.postObserver2 = this.http.post(`${environment.serverUrl}/prenota`, {ciao:"bello"},headers);
-    this.postObserver2.subscribe(data => this.postData2 = data);
+    this.postObserver2 = this.http.post(`${environment.serverUrl}/prenota`, newData,headers);
+    this.postObserver2.subscribe(data => {this.postData2 = data; console.log(data);});
     return false;
   }
 

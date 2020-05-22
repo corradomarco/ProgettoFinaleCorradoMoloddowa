@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utente } from './user';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +15,7 @@ export class AppComponent {
   constructor(private http: HttpClient) { } //Dependency injection
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
-    this.obsUnit = this.http.get<Utente[]>('https://3000-fb4604c6-1493-4ba5-abff-30ae10676aa7.ws-eu01.gitpod.io/users');
+    this.obsUnit = this.http.get<Utente[]>(`${environment.serverUrl}users`);
     //Mi sottoscrivo all’observable e scrivo la arrow function che riceve i dati
     this.obsUnit.subscribe((data: Utente[]) => {this.data = data;});
   }
@@ -27,7 +28,7 @@ selectUnit( newDeploytime: HTMLInputElement): boolean {
 
 
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
-    this.postObserver = this.http.post('https://3000-fb4604c6-1493-4ba5-abff-30ae10676aa7.ws-eu01.gitpod.io/users', JSON.stringify(newData),headers)
+    this.postObserver = this.http.post(`${environment.serverUrl}/users`, JSON.stringify(newData),headers)
     this.postObserver.subscribe(data => this.postData = data);
     return false;
   }

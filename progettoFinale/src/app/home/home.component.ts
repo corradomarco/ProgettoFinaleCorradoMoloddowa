@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class HomeComponent  {
  title = 'progetto';
   al:boolean=false;
+  isTracking: boolean;
   constructor(private http: HttpClient) { } //Dependency injection
   postObserver : Observable<Object>;//Cambiato tipo di dato attesto Utente -> Object
   postData : Object; //Cambiato tipo di dato Utente -> Object
@@ -51,12 +52,5 @@ export class HomeComponent  {
     this.postObserver2.subscribe(data => {this.postData2 = data; console.log(data);});
     return false;
   }
-
-
-
-
-
-
-
 
 }

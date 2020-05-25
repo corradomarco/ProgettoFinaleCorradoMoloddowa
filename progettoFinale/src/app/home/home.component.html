@@ -6,13 +6,13 @@
         <input name="id" #id>
 
       </div>
-    <button (click)="idBici(id)">
+    <button (click)="idBici(id)"class="btn btn-primary">
       guarda se è accessibile:
       </button>
 
       <div *ngIf="al">
     <p>È disponibile</p>
-        <button (click)="prenota(id)">
+        <button (click)="prenota(id)"class="btn btn-primary">
             prenota!
               </button>
       </div>

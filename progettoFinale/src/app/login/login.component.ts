@@ -17,7 +17,16 @@ export class LoginComponent {
   data: Utente[];
   al:boolean=false;
   noLog:boolean=true;
-  constructor(private http: HttpClient,private location: Location) { } //Dependency injection
+  formLog : FormGroup;
+  constructor(private http: HttpClient,private location: Location,fb : FormBuilder) {  //Dependency injection
+
+  this.formLog = fb.group(
+      {
+        username : ['', Validators.required],
+        password : ['', Validators.required]
+      }
+    )
+  }
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
     this.obsUnit = this.http.get<Utente[]>(`${environment.serverUrl}/users`);

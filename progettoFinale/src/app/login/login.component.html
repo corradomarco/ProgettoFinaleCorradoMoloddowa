@@ -1,21 +1,22 @@
-
 <div class="form-group">
-  <form class="jumbotron">
+  <form [formGroup]="formLog" class = "box">
 
   <div *ngIf="noLog">
     <h3 >login</h3>
       <div>
-        <label for="username">Username:</label>
-        <input name="username" #Username class="form-control">
+
+        <input placeholder="Username" name="username" type="text" #Username class="form-control" [formControl]="formLog.controls['username']">
+         <div *ngIf="!formLog.controls['username'].valid &&  (formLog.controls['username'].dirty || formLog.controls['username'].touched)" class="sbagliato" >Inserire username</div>
       </div>
 
       <div>
-        <label for="password">password:</label>
-        <input name="password" #Password class="form-control">
+
+        <input placeholder="Password" name="password" type="password" #Password class="form-control" [formControl]="formLog.controls['password']">
+         <div *ngIf="!formLog.controls['password'].valid &&  (formLog.controls['password'].dirty || formLog.controls['password'].touched)" class="sbagliato" >Inserire Password</div>
       </div>
-    <button (click)="addUnit(Username,Password)"class="btn btn-primary">
-      login
-      </button>
+   <button (click)="addUnit(Username,Password)" class="btn btn-success " type="submit" [disabled]="!formLog.valid">Entra</button><br>
+    <div *ngIf="!formLog.valid" class="sbagliato" >Credenziali sbagliate
+    </div>
   </div>
     <div *ngIf="al"><app-home-decisione></app-home-decisione></div>
     </form>
